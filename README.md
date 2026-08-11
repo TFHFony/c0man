@@ -28,3 +28,13 @@ produces `c0man.rom`.
 This project is an experiment in human/AI collaboration between
 **Arnaud de Klerk** and **Claude** (Anthropic) — the whole game, from
 first line of code to the final build, was written in a few hours.
+
+Do not expect a refined game. It's very BASIC, but it works. There
+might even be a bug or two. I've tested quite a lot, but not
+everything.
+The actual code is something like 5KBytes.
+
+Have fun!
+
+https://www.arnauddeklerk.com
+https://www.file-hunter.com
