@@ -1,6 +1,7 @@
 *.rom
 *.exe
 *.png
+!assets/*.png
 *.txt
 *.win/
 sjasmplus-1.23.1.win/
