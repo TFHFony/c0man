@@ -86,7 +86,20 @@ NL_GHDONE:
         RET
 
 ; ---- LOSE_LIFE: -1 life, GAME_STATE -> GS_DYING or GS_GAMEOVER -------
+;
+; GHOST_UPDATE_ALL runs all 4 ghosts every GS_PLAYING frame with no
+; re-check in between, so if two ghosts land on the player's cell in
+; the same frame this gets called twice before anything else observes
+; the first call's GAME_STATE change. Without this guard, the second
+; call DECs an already-zero LIVES past 0 (byte underflow to 255) and
+; its GS_DYING write clobbers the GS_GAMEOVER the first call just set
+; - the game silently un-ends and "255 lives" reads as infinite.
+; Bailing out here unless we're still GS_PLAYING makes only the first
+; hit per life-cycle count. ---------------------------------------------
 LOSE_LIFE:
+        LD      A,(GAME_STATE)
+        CP      GS_PLAYING
+        RET     NZ
         LD      A,(LIVES)
         DEC     A
         LD      (LIVES),A
